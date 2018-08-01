@@ -19,11 +19,11 @@ common.dialog = function (option) {
     var component = option.component;
     let template = '';
     if (typeof component == 'string') {
-      template = `<div class="w680" v-if="show"><el-dialog :title="title" v-model="show" :size="size" @close="close"><${component} v-on:callback="callback" :init_data="data">         </${component}></el-dialog></div>`;
+      template = `<div class="w680" v-if="show"><el-dialog :title="title" :visible="show" :width="size" @close="close"><${component} v-on:callback="callback" :init_data="data">         </${component}></el-dialog></div>`;
     } else if (option.htmlText != null) {
-      template = `<div class="w680" v-if="show"><el-dialog :title="title" v-model="show" :size="size" @close="close">${option.htmlText}</el-dialog></div>`;
+      template = `<div class="w680" v-if="show"><el-dialog :title="title" :visible="show" :width="size" @close="close">${option.htmlText}</el-dialog></div>`;
     } else {
-      template = '<div class="w680" v-if="show"><el-dialog :style="style" :title="title" v-model="show" :size="size" :before-close="handleClose" @close="close"><child v-on:callback="callback" :init_data="data"> \
+      template = '<div class="w680" v-if="show"><el-dialog :style="style" :title="title" :visible="show" :width="size" :before-close="handleClose" @close="close"><child v-on:callback="callback" :init_data="data"> \
         </child></el-dialog></div>';
     }
     if (option.type && option.type == 'iframe') {
@@ -33,7 +33,7 @@ common.dialog = function (option) {
               return {
                   title: option.title,
                   url: option.url,
-                  size: option._size_ == null ? 'small' : option._size_,
+                  size: option._size_ == null ? '50%' : option._size_,
                   modal: true,
                   custom_class: 'dialg-class',
                   close_on_press_escape: false,
@@ -43,7 +43,7 @@ common.dialog = function (option) {
                 };
             },
 
-          template: '<div class="w680 dialog-h400" v-if="show"><el-dialog  :title="title" v-model="show" :size="size"><iframe :src="url" style="width:100%;height:100%;"></iframe> \
+          template: '<div class="w680 dialog-h400" v-if="show"><el-dialog  :title="title" :visible="show" :width="size" ><iframe :src="url" style="width:100%;height:100%;"></iframe> \
         </child></el-dialog></div>',
         });
     } else {
@@ -53,7 +53,7 @@ common.dialog = function (option) {
               return {
                   title: option.title,
                   style:option.style,
-                  size: option._size_ == null ? 'small' : option._size_,
+                  size: option._size_ == null ? '50%' : option._size_,
                   modal: true,
                   custom_class: 'dialg-class',
                   close_on_press_escape: false,
